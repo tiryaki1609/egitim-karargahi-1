@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Paneli</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        .glass-login {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            color: white;
+        }
+        h2 { font-weight: 300; margin-bottom: 20px; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-size: 0.9rem; opacity: 0.9; }
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+        }
+        .btn-entry {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-entry:hover { background: rgba(255, 255, 255, 0.3); }
+        .hint { font-size: 0.85rem; margin-top: 15px; opacity: 0.8; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="glass-login">
+        <h2>Hoş Geldiniz</h2>
+        <div class="input-group">
+            <label>Beş ile üçü toplarsak kaç eder? Cevabı yazar mısın?</label>
+            <input type="text" id="bot-check" placeholder="Cevabın...">
+        </div>
+        <button class="btn-entry" onclick="checkEntry()">Kontrol Et ve Gir</button>
+        <p class="hint">Harika bir yolculuğa başlamak üzeresin!</p>
+    </div>
+
+    <script>
+        function checkEntry() {
+            const answer = document.getElementById('bot-check').value;
+            if(answer === "8") {
+                window.location.href = "kimlik.html";
+            } else {
+                alert("Neredeyse oldu! Tekrar denemeye ne dersin? Başaracağına eminim.");
+            }
+        }
+    </script>
+</body>
+</html>
