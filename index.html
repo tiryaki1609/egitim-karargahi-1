@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giriş Paneli</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
         body {
             height: 100vh;
             display: flex;
@@ -53,27 +53,35 @@
             transition: 0.3s;
         }
         .btn-entry:hover { background: rgba(255, 255, 255, 0.3); }
-        .hint { font-size: 0.85rem; margin-top: 15px; opacity: 0.8; font-style: italic; }
     </style>
 </head>
-<body>
-    <div class="glass-login">
+<body oncontextmenu="return false;"> <div class="glass-login">
         <h2>Hoş Geldiniz</h2>
         <div class="input-group">
             <label>Beş ile üçü toplarsak kaç eder? Cevabı yazar mısın?</label>
-            <input type="text" id="bot-check" placeholder="Cevabın...">
+            <input type="text" id="bot-check" autocomplete="off">
         </div>
-        <button class="btn-entry" onclick="checkEntry()">Kontrol Et ve Gir</button>
-        <p class="hint">Harika bir yolculuğa başlamak üzeresin!</p>
+        <button class="btn-entry" onclick="verify()">Kontrol Et ve Gir</button>
     </div>
 
     <script>
-        function checkEntry() {
-            const answer = document.getElementById('bot-check').value;
-            if(answer === "8") {
+        // İsa, burada cevabı matematiksel bir işlemle gizledik (8 yerine 4*2 kontrolü gibi)
+        function verify() {
+            const val = document.getElementById('bot-check').value;
+            const secret = (Math.sqrt(64)); // 8 rakamını gizli tutar
+            
+            if(parseInt(val) === secret) {
+                // Başarılı giriş
                 window.location.href = "kimlik.html";
             } else {
                 alert("Neredeyse oldu! Tekrar denemeye ne dersin? Başaracağına eminim.");
+            }
+        }
+
+        // Klavye ile inceleme araçlarını (F12 vb.) engelleme
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0)))) {
+                return false;
             }
         }
     </script>
