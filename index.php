@@ -1,0 +1,178 @@
+<?php
+/**
+ * Dijital Eğitim Karargahı - Keşif Kapısı
+ * Mimar Yetkisiyle Düzenlenmiştir.
+ */
+header('Content-Type: text/html; charset=utf-8');
+?>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dijital Eğitim Karargahı | Keşif Kapısı</title>
+    <style>
+        /* Temel Ayarlar ve Arka Plan */
+        body, html {
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            overflow: hidden;
+        }
+
+        /* Responsive (Duyarlı) Glassmorphism Panel */
+        .discovery-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            padding: clamp(20px, 5vw, 40px);
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            color: #ffffff;
+            box-sizing: border-box;
+            transition: all 0.5s ease;
+        }
+
+        /* Başlık ve Teşvik Edici Not */
+        h2 {
+            color: #ffffff !important;
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .pedagog-message {
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 12px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: #e0f2f1;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        /* Giriş Alanları */
+        .input-group { text-align: left; margin-bottom: 15px; }
+
+        label {
+            display: block; color: #ffffff !important;
+            font-size: 13px; margin-bottom: 6px; margin-left: 8px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%; padding: 14px;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: none; border-radius: 15px;
+            font-size: 16px; color: #2c3e50 !important;
+            box-sizing: border-box; outline: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Seçenekler Satırı */
+        .options {
+            display: flex; justify-content: space-between;
+            font-size: 12px; margin: 15px 5px 25px;
+            color: #ffffff;
+            align-items: center;
+        }
+
+        .options a { color: #ffffff; text-decoration: none; opacity: 0.8; font-weight: bold; }
+        .options a:hover { opacity: 1; text-decoration: underline; }
+
+        /* Butonlar */
+        .btn-action {
+            width: 100%; padding: 16px;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            color: white !important; border: none; border-radius: 20px;
+            font-size: 18px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .btn-action:active { transform: scale(0.97); }
+
+        .btn-qr {
+            margin-top: 5px; background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3); font-size: 14px;
+        }
+
+        /* Alt Bilgi */
+        .footer-note {
+            font-size: 11px; margin-top: 25px; opacity: 0.8; font-style: italic;
+        }
+
+        /* Arka Plan Bulanıklaştırma Efekti (Menü Açıldığında) */
+        .blur-bg { filter: blur(15px); pointer-events: none; }
+
+        .mic-active { animation: pulse 1.5s infinite; background: #ff4b2b !important; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="discovery-card" id="main-card">
+        <h2>Keşif Kapısı</h2>
+
+        <div id="login-section">
+            <div class="pedagog-message">
+                "Hoş geldin araştırmacı! Bugün hangi yeni bilgiyi keşfedeceğiz? Karargah seni bekliyor."
+            </div>
+
+            <form action="dashboard.php" method="POST" id="loginForm">
+                <div class="input-group">
+                    <label>Araştırmacı Adı</label>
+                    <input type="text" name="username" id="username" placeholder="İsmini buraya yazabilirsin" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Gizli Anahtar (Şifre)</label>
+                    <input type="password" name="password" id="password" placeholder="Şifreni buraya yazabilirsin" required>
+                </div>
+
+                <div class="options">
+                    <label style="cursor:pointer; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox" name="remember"> Beni Tanı
+                    </label>
+                    <a href="#" onclick="alert('Şifre hatırlatma talebiniz mimara iletildi.')">Şifremi Hatırlat</a>
+                </div>
+
+                <button type="button" class="btn-action" onclick="baslat()">Maceraya Başla</button>
+                <button type="button" class="btn-action btn-qr" onclick="seviyeTespit()">Karekod ile Seviye Tespit</button>
+            </form>
+        </div>
+
+        <p class="footer-note">
+            Senin gelişimin, bizim en büyük mutluluğumuz.
+        </p>
+    </div>
+
+    <script>
+        function baslat() {
+            const user = document.getElementById('username').value;
+            if(user) {
+                alert("Harika " + user + "! Karargaha girişin hazırlanıyor...");
+                document.getElementById('main-card').classList.add('blur-bg');
+                setTimeout(() => {
+                    document.getElementById('loginForm').submit();
+                }, 1000);
+            } else {
+                alert("Seni tanıyabilmemiz için ismini yazmaya ne dersin? Her şey senin için daha keyifli olacak!");
+            }
+        }
+
+        function seviyeTespit() {
+            alert("Seviye tespit modülü hazırlanıyor. Birazdan yeni bir keşfe başlayacağız!");
+        }
+    </script>
+
+</body>
+</html>
